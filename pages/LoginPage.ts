@@ -24,7 +24,7 @@ export class LoginPage {
     await this.password.fill(password);
     await this.loginButton.click();
 
-    // No sleep: wait until the Accounts Overview page is shown
+    
     await expect(this.accountsOverviewTitle).toBeVisible();
   }
 }

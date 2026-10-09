@@ -22,7 +22,7 @@ export class OpenAccountPage {
   async openCheckingAccount(): Promise<string> {
     await this.menuLink.click();
 
-    // No sleep: keep retrying until the dropdown has account options
+   
     await expect(this.fromAccount.locator('option')).not.toHaveCount(0);
 
     await this.accountType.selectOption({ label: 'CHECKING' });

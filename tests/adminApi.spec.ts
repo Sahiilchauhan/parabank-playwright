@@ -5,7 +5,7 @@ test('admin API: clean DB and set loan provider', async ({ request, page }) => {
   await cleanDatabase(request);
   await setLoanProvider(request, 'ws');
 
-  // Verify through the admin page that the setting really changed
+  // Verify - admin page setting changed
   await page.goto('https://parabank.parasoft.com/parabank/admin.htm');
   await expect(page.locator('#loanProvider')).toHaveValue('ws');
 });

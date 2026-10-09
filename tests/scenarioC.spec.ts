@@ -23,7 +23,7 @@ test('Scenario C: API parity', async ({ request }) => {
   const password = 'Pass1234';
   console.log('Username:', username, 'length:', username.length);
 
-  // 1. Create user (no browser, just HTTP)
+  
   await request.get(`${BASE}/register.htm`);
 
   const reg = await request.post(`${BASE}/register.htm`, {
@@ -45,7 +45,7 @@ test('Scenario C: API parity', async ({ request }) => {
   console.log('Register page says:', pageText(await reg.text()));
   expect(reg.ok()).toBeTruthy();
 
-  // 2. Get customer id, then their accounts
+   
   const loginRes = await request.get(
     `${BASE}/services/bank/login/${encodeURIComponent(username)}/${encodeURIComponent(password)}`,
     { headers: JSON_HDR }
@@ -62,7 +62,7 @@ test('Scenario C: API parity', async ({ request }) => {
   expect(accounts.length).toBeGreaterThan(0);
   const accountId = accounts[0].id;
 
-  // 3. Deposit money
+  
   const depositAmount = 250;
   const dep = await request.post(`${BASE}/services/bank/deposit`, {
     headers: JSON_HDR,
@@ -72,7 +72,7 @@ test('Scenario C: API parity', async ({ request }) => {
   if (!dep.ok()) console.log('Deposit body:', (await dep.text()).slice(0, 300));
   expect(dep.ok()).toBeTruthy();
 
-  // 4. Get transactions and validate the shape
+ 
   const txRes = await request.get(`${BASE}/services/bank/accounts/${accountId}/transactions`, { headers: JSON_HDR });
   console.log('Transactions status:', txRes.status());
   expect(txRes.ok()).toBeTruthy();

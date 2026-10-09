@@ -22,7 +22,7 @@ export class TransferFundsPage {
   async transfer(amount: string, fromId: string, toId: string) {
     await this.menuLink.click();
 
-    // No sleep: wait until both accounts appear in the dropdowns
+   
     await expect(this.fromAccount.locator(`option[value="${fromId}"]`)).toHaveCount(1);
     await expect(this.toAccount.locator(`option[value="${toId}"]`)).toHaveCount(1);
 

@@ -24,7 +24,7 @@ export class RequestLoanPage {
   async applyForLoan(amount: string, downPayment: string, fromAccountId: string) {
     await this.menuLink.click();
 
-    // No sleep: wait until the dropdown has options, then pick our account
+    
     await expect(this.fromAccount.locator('option')).not.toHaveCount(0);
     await expect(
       this.fromAccount.locator(`option[value="${fromAccountId}"]`)

@@ -22,7 +22,7 @@ export class FindTransactionsPage {
   async findAllTransactions(accountId: string) {
     await this.menuLink.click();
 
-    // No sleep: wait until our account appears in the dropdown
+   
     await expect(this.accountDropdown.locator(`option[value="${accountId}"]`)).toHaveCount(1);
     await this.accountDropdown.selectOption(accountId);
 
@@ -31,11 +31,11 @@ export class FindTransactionsPage {
     await this.toDate.fill('12-31-2030');
     await this.findByDateRangeButton.click();
 
-    // No sleep: wait until the table has at least one row
+     
     await expect(this.tableRows.first()).toBeVisible();
   }
 
-  // returns the Debit column text of every row, like "$150.00" (empty if no debit)
+  //  it return debeted column on every row..  
   async getDebitValues(): Promise<string[]> {
     const count = await this.tableRows.count();
     const debits: string[] = [];

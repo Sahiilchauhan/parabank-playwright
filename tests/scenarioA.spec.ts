@@ -8,11 +8,13 @@ import { generateUser } from '../types/dataGenerator';
 import { saveSharedData } from '../utils/sharedData';
 
 test('Scenario A: loan orchestration', async ({ page, request }) => {
-  // 1. API pre-condition
+
+  // 1. API precondition
   await cleanDatabase(request);
   await setLoanProvider(request, 'ws');
 
-  // 2. UI action: register a new user
+
+  // 2. UI action register new user
   const user = generateUser();
   const registerPage = new RegisterPage(page);
   await registerPage.goto();
@@ -20,19 +22,19 @@ test('Scenario A: loan orchestration', async ({ page, request }) => {
   await expect(page.locator("//p[contains(text(),'Your account was created successfully')]")).toBeVisible();
   console.log('User registered: ' + user.username);
 
-  // open a new checking account and get its dynamic id
+ 
   const openAccountPage = new OpenAccountPage(page);
   const checkingId = await openAccountPage.openCheckingAccount();
   console.log('Checking account opened: ' + checkingId);
 
-  // save the user so Scenario B can use the same one
+   
   saveSharedData({
     username: user.username,
     password: user.password,
     checkingId: checkingId,
   });
 
-  // apply for a loan using that account id
+  
   const loanPage = new RequestLoanPage(page);
   await loanPage.applyForLoan('1000', '100', checkingId);
 
