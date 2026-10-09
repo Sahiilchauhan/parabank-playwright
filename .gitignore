@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Playwright output
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Custom reporter output (generated on every run)
+/reports/
+
+# Environment files
+.env
